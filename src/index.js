@@ -33,8 +33,8 @@ module.exports.toVector=function(ranges, opt){
     var peaks = [];
     for(var i=0;i<ranges.length;i++){
         var range = ranges[i];
-        for(var signal of range.signal){
-            peaks=peaks.concat(signal.peak);
+        for(var j=0;j<range.signal.length;j++){
+            peaks=peaks.concat(range.signal[j].peak);
         }
     }
 
