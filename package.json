@@ -1,0 +1,38 @@
+{
+  "name": "nmr-formater",
+  "version": "0.1.0",
+  "description": "ACS, NMR-J formater and range resurrector from ACS string",
+  "main": "src/index.js",
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --require should --reporter mocha-better-spec-reporter --recursive",
+    "build": "cheminfo build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cheminfo-js/nmr-formater.git"
+  },
+  "keywords": [
+    "ACS",
+    "resurrect",
+    "parser"
+  ],
+  "author": "Andrés Castillo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cheminfo-js/nmr-formater/issues"
+  },
+  "homepage": "https://github.com/cheminfo-js/nmr-formater",
+  "devDependencies": {
+    "mocha": "^2.3.1",
+    "mocha-better-spec-reporter": "^2.1.1",
+    "should": "^7.1.0",
+    "cheminfo-tools": "1.3.4"
+  },
+  "dependencies": {
+    "extend": "3.0.0"
+  }
+}
