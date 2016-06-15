@@ -1,2 +1,5 @@
-# nmr-formater
-ACS, NMR-J formater; Resurrect a range from ACS string 
+# nmr-range
+
+ACS, NMR-J formatter;
+Resurrect ranges from ACS string
+Convert an array of ranges in [x,y] format

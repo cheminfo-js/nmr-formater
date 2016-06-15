@@ -21,22 +21,20 @@ module.exports.nmrJ = function(Js, options){
     }
     return Jstring;
 }
-
-module.exports.toVector=function(ranges, opt){
+/**
+ * This function converts an array of peaks [{x, y, width}] in a vector equally x,y vector
+ * TODO This function is very general and should be placed somewhere else
+ * @param peaks
+ * @param opt
+ * @returns {{x: Array, y: Array}}
+ */
+module.exports.peak2Vector=function(peaks, opt){
     var options = opt||{};
     var from = options.from;
     var to = options.to;
     var nbPoints = options.nbPoints||16*1024;
     var fnName = options.function||"gaussian";
     var nWidth = options.nWidth || 4;
-
-    var peaks = [];
-    for(var i=0;i<ranges.length;i++){
-        var range = ranges[i];
-        for(var j=0;j<range.signal.length;j++){
-            peaks=peaks.concat(range.signal[j].peak);
-        }
-    }
 
     if(!from){
         from = Number.MAX_VALUE;
@@ -65,6 +63,11 @@ module.exports.toVector=function(ranges, opt){
         y[i] = 0;
     }
 
+    var intensity = "intensity";
+    if(peaks[0].y){
+        intensity="y";
+    }
+
     for(var i=0;i<peaks.length;i++){
         var peak = peaks[i];
         if(peak.x>from && peak.x<to){
@@ -73,13 +76,13 @@ module.exports.toVector=function(ranges, opt){
             if(fnName=="gaussian"){
                 for(var j=index-w;j<index+w;j++){
                     if(j>=0&&j<nbPoints){
-                        y[j]+=peak.intensity*Math.exp(-0.5*Math.pow((peak.x-x[j])/(peak.width/2),2));
+                        y[j]+=peak[intensity]*Math.exp(-0.5*Math.pow((peak.x-x[j])/(peak.width/2),2));
                     }
                 }
             }else{
                 for(var j=index-w;j<index+w;j++){
                     if(j>=0&&j<nbPoints){
-                        y[j]+=peak.intensity*Math.pow(peak.width,2)/(Math.pow(peak.x-x[j],2)+Math.pow(peak.width/2,2));
+                        y[j]+=peak[intensity]*Math.pow(peak.width,2)/(Math.pow(peak.x-x[j],2)+Math.pow(peak.width/2,2));
 
                     }
                 }
@@ -89,6 +92,18 @@ module.exports.toVector=function(ranges, opt){
     }
 
     return {x:x,y:y};
+}
+
+module.exports.range2Vector=function(ranges, opt){
+    var peaks = [];
+    for(var i=0;i<ranges.length;i++){
+        var range = ranges[i];
+        for(var j=0;j<range.signal.length;j++){
+            peaks=peaks.concat(range.signal[j].peak);
+        }
+    }
+
+    return module.exports.peak2Vector(peaks, opt);
 }
 
 module.exports.toACS = function(spectrum, options){

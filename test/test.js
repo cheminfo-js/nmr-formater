@@ -24,7 +24,7 @@ describe('Peak-picking formating and parsing', function () {
     });
 
     it('ranges to vector', function () {
-        var fn = Data.toVector(peakPicking2);
+        var fn = Data.range2Vector(peakPicking2);
         fn.x.length.should.equal(16*1024);
         fn.y.length.should.equal(16*1024);
         fn.x[0].should.approximately(1.1657135299531254, 0.005);
