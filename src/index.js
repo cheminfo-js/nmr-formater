@@ -33,7 +33,7 @@ module.exports.peak2Vector=function(peaks, opt){
     var from = options.from;
     var to = options.to;
     var nbPoints = options.nbPoints||16*1024;
-    var fnName = options.function||"gaussian";
+    var fnName = options.fnName||"gaussian";
     var nWidth = options.nWidth || 4;
 
     if(!from){
