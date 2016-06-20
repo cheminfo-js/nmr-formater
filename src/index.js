@@ -106,7 +106,9 @@ module.exports.range2Vector=function(ranges, opt){
     return module.exports.peak2Vector(peaks, opt);
 }
 
-module.exports.toACS = function(spectrum, options){
+module.exports.toACS = function(spectrumIn, options){
+
+    var spectrum = JSON.parse(JSON.stringify(spectrumIn));
 
     if(spectrum[0].delta1){//Old signals format
         return old.toACS(spectrum, options);
