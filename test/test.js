@@ -31,4 +31,11 @@ describe('Peak-picking formating and parsing', function () {
         fn.x[fn.x.length-1].should.approximately(7.318545497368789, 0.005);
         fn.y[0].should.greaterThan(0);
     });
+
+    it('ranges to peaks', function () {
+        var fn = Data.range2Peaks(peakPicking2);
+        fn[0].x.should.greaterThan(0);
+        fn[0].intensity.should.greaterThan(0);
+        fn[0].width.should.greaterThan(0);
+    });
 });
