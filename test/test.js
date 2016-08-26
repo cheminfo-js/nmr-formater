@@ -1,9 +1,6 @@
 /**
  * Created by acastillo on 6/14/16.
  */
-/**
- * Created by acastillo on 3/11/15.
- */
 'use strict';
 
 var Data = require('..');
@@ -37,5 +34,25 @@ describe('Peak-picking formating and parsing', function () {
         fn[0].x.should.greaterThan(0);
         fn[0].intensity.should.greaterThan(0);
         fn[0].width.should.greaterThan(0);
+    });
+});
+
+describe('Prediction to ranges', function () {
+    const prediction = [{"atomIDs":["8"],"diaIDs":["did@`@f\\bbRaih@J@A~dHBIU@"],"integral":1,"delta":7.26,"j":[{"assignment":"9","coupling":3.859,"multiplicity":2},{"assignment":"10","coupling":3.879,"multiplicity":2},{"assignment":"13","coupling":1.7535,"multiplicity":2}]},
+        {"atomIDs":["9"],"diaIDs":["did@`@fTfUvf`@h@GzP`HeT"],"integral":1,"delta":7.196,"j":[{"assignment":"8","coupling":3.859,"multiplicity":2},{"assignment":"10","coupling":0.646,"multiplicity":2},{"assignment":"13","coupling":0.6465,"multiplicity":2},{"assignment":"14","coupling":3.859,"multiplicity":2}]},
+        {"atomIDs":["10"],"diaIDs":["did@`@fTfYUn`HH@GzP`HeT"],"integral":1,"delta":7.162,"j":[{"assignment":"8","coupling":3.879,"multiplicity":2},{"assignment":"9","coupling":0.646,"multiplicity":2},{"assignment":"14","coupling":1.762,"multiplicity":2}]},
+        {"atomIDs":["11"],"diaIDs":["did@`@fTf[Waj@@bJ@_iB@bUP"],"integral":1,"delta":2.653,"j":[{"assignment":"15","coupling":3.696,"multiplicity":2},{"assignment":"16","coupling":3.696,"multiplicity":2},{"assignment":"17","coupling":3.696,"multiplicity":2}]},
+        {"atomIDs":["12"],"diaIDs":["did@`@fTf[Waj@@bJ@_iB@bUP"],"integral":1,"delta":2.653,"j":[{"assignment":"15","coupling":3.696,"multiplicity":2},{"assignment":"16","coupling":3.696,"multiplicity":2},{"assignment":"17","coupling":3.696,"multiplicity":2}]},
+        {"atomIDs":["13"],"diaIDs":["did@`@fTfYUn`HH@GzP`HeT"],"integral":1,"delta":7.162,"j":[{"assignment":"8","coupling":1.7535,"multiplicity":2},{"assignment":"9","coupling":0.6465,"multiplicity":2},{"assignment":"14","coupling":3.879,"multiplicity":2}]},
+        {"atomIDs":["14"],"diaIDs":["did@`@f\\bbRaih@J@A~dHBIU@"],"integral":1,"delta":7.26,"j":[{"assignment":"9","coupling":3.859,"multiplicity":2},{"assignment":"10","coupling":1.762,"multiplicity":2},{"assignment":"13","coupling":3.879,"multiplicity":2}]},
+        {"atomIDs":["15"],"diaIDs":["did@`@fTeYWaj@@@GzP`HeT"],"integral":1,"delta":0.992,"j":[{"assignment":"11","coupling":3.696,"multiplicity":2},{"assignment":"12","coupling":3.696,"multiplicity":2}]},
+        {"atomIDs":["16"],"diaIDs":["did@`@fTeYWaj@@@GzP`HeT"],"integral":1,"delta":0.992,"j":[{"assignment":"11","coupling":3.696,"multiplicity":2},{"assignment":"12","coupling":3.696,"multiplicity":2}]},
+        {"atomIDs":["17"],"diaIDs":["did@`@fTeYWaj@@@GzP`HeT"],"integral":1,"delta":0.992,"j":[{"assignment":"11","coupling":3.696,"multiplicity":2},{"assignment":"12","coupling":3.696,"multiplicity":2}]}];
+
+
+    it('10 spines should yield 4 ranges', function () {
+        var ranges = Data.prediction2Ranges(prediction, {lineWidth:1});
+        //console.log(ranges);
+        ranges.length.should.eql(4);
     });
 });

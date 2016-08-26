@@ -10,6 +10,7 @@ var parenthesis="";
 var spectro="";
 var rangeForMultiplet=false;
 
+module.exports = require("./prediction2Range");
 module.exports.nmrJ = function(Js, options){
     var Jstring = "";
     var opt = Object.assign({},{separator:", ", nbDecimal:2}, options);
