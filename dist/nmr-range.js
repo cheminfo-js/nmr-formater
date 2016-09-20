@@ -67,6 +67,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	var rangeForMultiplet=false;
 
 	module.exports = __webpack_require__(2);
+
+	module.exports.update = function(ranges){
+	    for (var i=0; i<ranges.length; i++){
+	        var range = ranges[i];
+	        for (var j=0; j<range.signal.length; j++){
+	            var signal = range.signal[j];
+	            if (signal.j && ! signal.multiplicity) {
+	                signal.multiplicity = "";
+	                for (var k=0; k<signal.j.length;k++){
+	                    signal.multiplicity+=signal.j[k].multiplicity;
+	                }
+	            }
+	        }
+	    }
+
+	    return ranges;
+	}
+
 	module.exports.nmrJ = function(Js, options){
 	    var Jstring = "";
 	    var opt = Object.assign({},{separator:", ", nbDecimal:2}, options);
