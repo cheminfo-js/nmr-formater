@@ -31,9 +31,16 @@ describe('Peak-picking formating and parsing', function () {
     it('format single range with visualizer range', function () {
         var acs = Data.toACS(singleRange,{rangeForMultiplet:true, nucleus:"1H", observe:400});
         acs.should.equal("<sup>1</sup>H NMR (400 MHz) δ 1.00 (1 H).");
-        singleRange[0].signal[0].multiplicity = "s"
+        singleRange[0].signal[0].multiplicity = "s";
         var acs2 = Data.toACS(singleRange,{rangeForMultiplet:true, nucleus:"1H", observe:400});
         acs2.should.equal("<sup>1</sup>H NMR (400 MHz) δ 1.00 (s, 1 H).");
+        singleRange[0].signal[0].j = [{multiplicity:"s",coupling:0}];
+        var acs3 = Data.toACS(singleRange,{rangeForMultiplet:true, nucleus:"1H", observe:400});
+        acs3.should.equal("<sup>1</sup>H NMR (400 MHz) δ 1.00 (s, 1 H).");
+        singleRange[0].signal[0].multiplicity = "d";
+        singleRange[0].signal[0].j = [{multiplicity:"d", coupling:7}];
+        var acs4 = Data.toACS(singleRange,{rangeForMultiplet:true, nucleus:"1H", observe:400});
+        acs4.should.equal("<sup>1</sup>H NMR (400 MHz) δ 1.00 (d, 1 H, <i>J</i> = 7.0 Hz).");
     });
 
     it('ranges to vector', function () {
