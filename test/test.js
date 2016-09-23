@@ -79,3 +79,28 @@ describe('Prediction to ranges', function () {
         ranges.length.should.eql(4);
     });
 });
+
+describe('Update ranges', function () {
+    var sum = 3;
+    it('change sum', function () {
+        var ranges = [{integral:1}, {integral:2}];
+        ranges = Data.updateIntegrals(ranges, {sum: sum*2});
+        ranges.should.eql([{integral:2}, {integral:4}]);
+    });
+    it('add an integral', function () {
+        var ranges = [{integral:1}, {integral:2}];
+        ranges.push({integral:3});
+        ranges = Data.updateIntegrals(ranges, {sum: sum});
+        ranges.should.eql([{integral:0.5}, {integral:1},{integral:1.5}]);
+    });
+    it('delete an integral', function () {
+        var ranges = [{integral:1}];
+        ranges = Data.updateIntegrals(ranges, {sum: sum});
+        ranges.should.eql([{integral:3}]);
+    });
+    it('change an integral', function () {
+        var ranges = [{integral:1}, {integral:2}];
+        ranges = Data.updateIntegrals(ranges, {factor:2});
+        ranges.should.eql([{integral:2}, {integral:4}]);
+    });
+});
