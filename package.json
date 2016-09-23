@@ -1,6 +1,6 @@
 {
   "name": "nmr-range",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "ACS, NMR-J formater and range resurrector from ACS string",
   "main": "src/index.js",
   "directories": {
