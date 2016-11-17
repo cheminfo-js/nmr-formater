@@ -147,26 +147,27 @@ module.exports.range2Peaks = function(ranges){
     return peaks;
 }
 
-module.exports.toACS = function(spectrumIn, options){
+module.exports.toACS = function(spectrumIn, opt) {
+    let options = Object.assign({}, {nucleus: "1H"}, opt);
 
     var spectrum = JSON.parse(JSON.stringify(spectrumIn));
 
-    if(spectrum[0].delta1){//Old signals format
+    if(spectrum[0].delta1) {//Old signals format
         return old.toACS(spectrum, options);
     }
 
     spectrum = module.exports.update(spectrum);
 
-    acsString="";
-    parenthesis="";
-    spectro="";
+    acsString = "";
+    parenthesis = "";
+    spectro = "";
     var solvent = null;
-    if(options&&options.solvent)
+    if(options && options.solvent)
         solvent = options.solvent;
-    if(options&&options.rangeForMultiplet!=undefined)
+    if(options && options.rangeForMultiplet != undefined)
         rangeForMultiplet = options.rangeForMultiplet;
 
-    if(options&&options.ascending){
+    if(options && options.ascending){
         spectrum.sort(function(a,b){
             return b.from- a.from
         });
@@ -178,10 +179,10 @@ module.exports.toACS = function(spectrumIn, options){
     }
 
     spectrum.type="NMR SPEC";
-    if (options&&options.nucleus=="1H") {
+    if (options && options.nucleus == "1H") {
         formatAcs_default(spectrum, false, 2, 1, solvent, options);
     }
-    if (options&&options.nucleus=="13C") {
+    if (options && options.nucleus == "13C") {
         formatAcs_default(spectrum, false, 1, 0, solvent,options);
     }
 
